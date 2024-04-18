@@ -1,9 +1,15 @@
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import MainContent from "./components/MainContent";
 
 function App() {
   return (
-    <h1 className="text-center">pdfOTG</h1>
-    
-  )
+    <>
+      <Navbar />
+      <MainContent />
+      <Footer />
+    </>
+  );
 }
 
-export default App
+export default App;
