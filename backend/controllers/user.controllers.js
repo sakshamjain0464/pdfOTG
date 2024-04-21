@@ -6,6 +6,12 @@ const Session = require('../models/sessions.model');
 async function signup(req, res) {
     try {
         const { firstname, lastname, username, email, password } = req.body;        // Extracting required information
+
+        // Check if the user already exists
+        const userExists = await User.findOne({ $or: [{ username }, { email }] });
+
+        if (userExists) { return res.status(400).json({ error: 'User Already Exists' }); }       // If user exists return error
+
         const newUser = new User({ firstname, lastname, username, email });        // Creating new user
         newUser.password = await newUser.createPasswordHash(password);              // Hashing Password
         await newUser.save();                                                     // Save the new user
@@ -21,11 +27,10 @@ async function signup(req, res) {
 async function login(req, res) {
     try {
         const { sessionID, user } = req;               // Exttact the session if from request
-        console.log(user)
         // Create a new session
         const newSession = new Session({ session: sessionID, userId: user._id });
         await newSession.save();         // Save the session info
-        res.status(200).json({ message: 'Logged In' });
+        res.status(200).json({ message: 'Logged In', user: { id: user._id, username: user.username, email: user.email, firstname: user.firstname, lastname: user.lastname }});
     }
     catch (error) {
         res.status(400).json({message: "Error Logging in"});

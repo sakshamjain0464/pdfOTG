@@ -7,7 +7,7 @@ function validation(req, res, next) {
 
     // If any of the validation fails
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(401).json({ errors: errors.array() });
     }
 
     // If validation successful

@@ -6,9 +6,11 @@ const cookieParser = require('cookie-parser'); // Import Cookie Parser
 const expressSession = require('express-session'); // Import Express Session
 const passport = require('passport'); // Import passport
 require('./configs/passport.local.config'); // Run Passport local authentication configuration
+const cors = require('cors'); // Import cors
 
 connectToDB(); // Connect to Database
 const app = express(); // Initialized the app
+app.use(cors())
 app.use(logger('dev')); // Initialized logger for development
 app.use(express.json()); // Use express.json middleware
 app.use(cookieParser()); // Use Cookie Parser
