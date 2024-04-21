@@ -1,6 +1,38 @@
 import GoogleButton from "../../components/GoogleButton";
+import getLogin from "../../utils/user/login";
+import { login } from  "../../store/slices/user.slice";
+import {useState} from "react";
+import { useDispatch} from "react-redux";
+import toast from "react-hot-toast";
+
 
 function Login() {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const user = await getLogin(username, password);
+    if(user === 'Unauthorized') {
+      toast.error('Invalid username or password');
+      setLoading(false);
+      return;
+    }
+    if(user == null){
+      toast.error('An error occured');
+      setLoading(false);
+      return;
+    }
+    dispatch(login(user));
+    toast.success('Login successful');
+    setLoading(false);
+  };
+
   return (
     <div className="relative hero min-h-[70vh] h-fit bg-base-200 z-10">
       <div className="hero-content lg:gap-10 gap-4 flex-col lg:flex-row-reverse py-10">
@@ -12,7 +44,7 @@ function Login() {
             <button className="btn btn-primary">Create Account</button>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Username</span>
@@ -22,6 +54,8 @@ function Login() {
                 placeholder="Username"
                 minLength={8}
                 className="input input-bordered"
+                value={username}
+                onChange={(e) => {setUsername(e.target.value)}}
                 required
               />
             </div>
@@ -33,6 +67,8 @@ function Login() {
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
+                value={password}
+                onChange={(e) => {setPassword(e.target.value)}}
                 required
               />
               <label className="label">
@@ -42,7 +78,7 @@ function Login() {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary" disabled={loading}>{loading ? (<span className="loading loading-spinner loading-sm"></span>): ('Login')}</button>
             </div>
             <GoogleButton />
           </form>

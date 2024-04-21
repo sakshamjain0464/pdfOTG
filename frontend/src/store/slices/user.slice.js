@@ -4,7 +4,7 @@ import userData  from '../../user'
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        user: userData,
+        user: null,
     },
     reducers: {
         login: (state, action) => {
