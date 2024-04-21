@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+}
+
 #root{
     display: flex;
     align-items: center;
     flex-direction: column;
+    min-height: 100vh;
     height: 100vh;
+    z-index: 0;
+    overflow-x: hidden;
+}
+
+#hero-particles > canvas{
+    position: static !important; 
+    top: 0;
+    left: 0;
+    width: 2px;
+    z-index: -2;
 }
