@@ -10,7 +10,9 @@ function Hero() {
 
   useEffect(() => {
     if (!user) {
-      document.getElementById("login-modal").showModal();
+      setTimeout(() => {
+        document.getElementById("login-modal").showModal();
+      }, 5000)
     } else {
       document.getElementById("welcome-modal").showModal();
     }
@@ -74,7 +76,13 @@ function Hero() {
       </div>
       <Login />
       <Modal id={"login-modal"}>
-        <div>Hello World</div>
+      <div className="w-full h-full flex items-center justify-center flex-col gap-3">
+          <h1 className="text-3xl text-center font-bold">Welcome👋</h1>
+          <p className="tracking-wider">
+            Looks Like you have not signed in yet. Click the button below to login now!.
+          </p>
+          <Link className="btn btn-outline btn-info" to={'/dashboard/login'}>Login Now!</Link>
+        </div>
       </Modal>
       { user && <Modal id={"welcome-modal"}>
         <div className="w-full h-full flex items-center justify-center flex-col gap-3">

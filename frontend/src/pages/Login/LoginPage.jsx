@@ -1,6 +1,47 @@
 import GoogleButton from "../../components/GoogleButton";
+import getLogin from "../../utils/user/login";
+import { login } from "../../store/slices/user.slice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const user = useSelector((state) => state.user.user);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const user = await getLogin(username, password);
+    if (user === "Unauthorized") {
+      toast.error("Invalid username or password");
+      setLoading(false);
+      return;
+    }
+    if (user == null) {
+      toast.error("An error occured");
+      setLoading(false);
+      return;
+    }
+    dispatch(login(user));
+    toast.success("Login successful");
+    navigate("/dashboard");
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  });
+
   return (
     <div className="hero h-full w-full bg-base-200">
       <div className="hero-content w-full flex-col">
@@ -10,7 +51,7 @@ function LoginPage() {
           </h1>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Username</span>
@@ -20,6 +61,10 @@ function LoginPage() {
                 placeholder="Username"
                 minLength={8}
                 className="input input-bordered"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
                 required
               />
             </div>
@@ -30,6 +75,10 @@ function LoginPage() {
               <input
                 type="password"
                 placeholder="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
                 className="input input-bordered"
                 required
               />
@@ -40,7 +89,13 @@ function LoginPage() {
               </label>
             </div>
             <div className="form-control mt-3">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary" disabled={loading}>
+                {loading ? (
+                  <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                  "Login"
+                )}
+              </button>
             </div>
             <GoogleButton />
             <div className="divider my-3">OR</div>

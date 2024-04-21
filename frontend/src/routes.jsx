@@ -3,6 +3,7 @@ import App from './App.jsx'
 import Hero from './pages/Home/Hero.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import LoginPage from './pages/Login/LoginPage.jsx'
+import SignupPage from './pages/Signup/Signup.jsx'
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
                     {
                         path: 'login',
                         element: <LoginPage />
+                    },
+                    {
+                        path: 'signup',
+                        element: <SignupPage />
                     }
                 ]
             },
