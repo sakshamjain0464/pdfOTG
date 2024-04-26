@@ -18,7 +18,7 @@ async function signup(req, res) {
         return res.status(200).json({ message: 'User Registered' });                      
     }
     catch (error) {
-        res.status(400).send('Error Registering User');
+        res.status(500).send('Error Registering User');
         console.log(error);
     }
 }
@@ -30,13 +30,15 @@ async function login(req, res) {
         // Create a new session
         const newSession = new Session({ session: sessionID, userId: user._id });
         await newSession.save();         // Save the session info
-        res.status(200).json({ message: 'Logged In', user: { id: user._id, username: user.username, email: user.email, firstname: user.firstname, lastname: user.lastname }});
+        res.status(200).json({ message: 'Logged In' }).end();
     }
     catch (error) {
         res.status(400).json({message: "Error Logging in"});
         console.log(error);
     }
 }
+
+
 
 // Logout Controller
 async function logout(req, res) {
@@ -50,13 +52,13 @@ async function logout(req, res) {
         // Logout the user using logout function provided by passport js
         // This will deserialize the user from the request and will destroy the session
         req.logout(function (err) {
-            if (err) {return res.status(400).json({ error: err }); }
+            if (err) {return res.status(400).json({ error: err }).end(); }
         });
 
         // Delete the session info from database
         await Session.findOneAndDelete({ session: sessionId, userId: userId });
 
-        res.status(200).json({ message: 'Logged Out' });
+        res.status(200).json({ message: 'Logged Out' }).end();
     }
     catch (error) {
         res.status(500).send('Internal Server Error');

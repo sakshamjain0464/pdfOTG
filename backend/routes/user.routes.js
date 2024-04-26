@@ -39,11 +39,12 @@ router.post('/login',
 );
 
 // User Profile Route
-router.get('/profile', authorize, (req, res) => {
-    res.status(200).json({ user: "user" });
+router.get('/getUser', authorize, (req, res) => {
+    const user = req.user;
+    res.status(200).json({user: { id: user._id, username: user.username, email: user.email, firstname: user.firstname, lastname: user.lastname,  googleID : user.googleId}});
 });
 
 // User Logout Route
-router.post('/logout', logout);
+router.get('/logout', logout);
 
 module.exports = router; // Export the router

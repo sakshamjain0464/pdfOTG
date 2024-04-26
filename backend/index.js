@@ -10,15 +10,19 @@ const cors = require('cors'); // Import cors
 
 connectToDB(); // Connect to Database
 const app = express(); // Initialized the app
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    credentials: true
+}))
 app.use(logger('dev')); // Initialized logger for development
 app.use(express.json()); // Use express.json middleware
 app.use(cookieParser()); // Use Cookie Parser
-app.use(expressSession({ 
+app.use(expressSession({
     secret: 'pdfOTG',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 3 * 24 * 60 * 60 * 1000 }
+    cookie: { maxAge: 3 * 24 * 60 * 60 * 1000, sameSite: 'lax', httpOnly: false}
 }));    // Use express-session for creating sessions
 app.use(passport.initialize()); // Initialize passport
 app.use(passport.session()); // use passport.session middleware for passport.session for session based authentication
