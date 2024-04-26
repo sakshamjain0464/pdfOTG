@@ -1,23 +1,24 @@
 import axios from 'axios';
 
-export const login = async (username, password) => {
+export const getUser = async () => {
   try {
-    const response = await axios.post('http://localhost:3000/user/login', {
-      username,
-      password,
-    }, {
+    const response = await axios.get('http://localhost:3000/user/getUser', {
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:5173',
+        'Access-Control-Allow-Origin': '*',
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       },
       withCredentials: true
     });
+
+    console.log('response', response);
+
     if (response.status === 200) {
       console.log('User logged in successfully');
-      return response.data;
+      return response.data.user;
     }
   } catch (error) {
-    if (error.response?.status === 401) {
+    if (error.response.status === 401) {
+      console.log(error.response);
       return 'Unauthorized';
     }
     console.error(error);
@@ -25,4 +26,4 @@ export const login = async (username, password) => {
   }
 }
 
-export default login;
+export default getUser;

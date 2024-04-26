@@ -8,7 +8,9 @@ export const signup = async (username, password, firstname, lastname, email) => 
             firstname,
             lastname,
             email
-        });
+        }, {headers: {
+            "Access-Control-Allow-Origin": '*'
+        },withCredentials: true});
         if (response.status === 200) {
             console.log('User logged in successfully');
             return "User registered successfully";

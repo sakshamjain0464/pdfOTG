@@ -1,23 +1,7 @@
-import { useEffect } from "react";
-import Modal from "../../components/Modal";
-import { useSelector } from "react-redux";
 import Login from "./Login";
 import ParticlesComponent from "../../components/Particles";
-import { Link } from "react-router-dom";
 
 function Hero() {
-  const user = useSelector((state) => state.user.user);
-
-  useEffect(() => {
-    if (!user) {
-      setTimeout(() => {
-        document.getElementById("login-modal").showModal();
-      }, 5000)
-    } else {
-      document.getElementById("welcome-modal").showModal();
-    }
-  }, [user]);
-
   return (
     <main className="h-fit w-screen bg-base-200 p6 select-none">
       <div className="hero h-[90vh] mt-3 w-full">
@@ -75,28 +59,6 @@ function Hero() {
         </div>
       </div>
       <Login />
-      <Modal id={"login-modal"}>
-      <div className="w-full h-full flex items-center justify-center flex-col gap-3">
-          <h1 className="text-3xl text-center font-bold">Welcome👋</h1>
-          <p className="tracking-wider">
-            Looks Like you have not signed in yet. Click the button below to login now!.
-          </p>
-          <Link className="btn btn-outline btn-info" to={'/dashboard/login'}>Login Now!</Link>
-        </div>
-      </Modal>
-      { user && <Modal id={"welcome-modal"}>
-        <div className="w-full h-full flex items-center justify-center flex-col gap-3">
-          <h1 className="text-3xl text-center font-bold">Welcome Back 👋</h1>
-          <h2 className="text-2xl text-center font-semibold tracking-wider">
-            {user.firstname + " " + user.lastname}
-          </h2>
-          <p className="italic">
-            Wow, it&apos;s been a while! We&apos;re thrilled to see you back.
-          </p>
-          <p>Click the button below to head to your dashboard.</p>
-          <Link className="btn btn-outline btn-info" to={'/dashboard'}>Go Now!</Link>
-        </div>
-      </Modal>}
     </main>
   );
 }

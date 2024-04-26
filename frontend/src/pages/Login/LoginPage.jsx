@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import getUser from "../../utils/user/getUser";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -19,13 +20,19 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const user = await getLogin(username, password);
-    if (user === "Unauthorized") {
+    const loggedIn = await getLogin(username, password);
+    if (loggedIn === "Unauthorized") {
       toast.error("Invalid username or password");
       setLoading(false);
       return;
     }
-    if (user == null) {
+    if (loggedIn == null) {
+      toast.error("An error occured");
+      setLoading(false);
+      return;
+    }
+    const user = await getUser();
+    if (user === "Unauthorized") {
       toast.error("An error occured");
       setLoading(false);
       return;

@@ -4,6 +4,8 @@ import { login } from  "../../store/slices/user.slice";
 import {useState} from "react";
 import { useDispatch} from "react-redux";
 import toast from "react-hot-toast";
+import getUser from "../../utils/user/getUser";
+
 
 
 function Login() {
@@ -17,19 +19,26 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const user = await getLogin(username, password);
-    if(user === 'Unauthorized') {
+    const loggedIn = await getLogin(username, password);
+    if(loggedIn === 'Unauthorized') {
       toast.error('Invalid username or password');
       setLoading(false);
       return;
     }
-    if(user == null){
+    if(loggedIn == null){
+      toast.error('An error occured');
+      setLoading(false);
+      return;
+    }
+    const user = await getUser();
+    if(user === 'Unauthorized') {
       toast.error('An error occured');
       setLoading(false);
       return;
     }
     dispatch(login(user));
     toast.success('Login successful');
+    document.getElementById("welcome-modal").showModal();
     setLoading(false);
   };
 

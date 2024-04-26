@@ -1,10 +1,28 @@
 import Avatar from 'react-avatar';
 import { FaUser } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
+import logoutUser from '../utils/user/logout';
+import toast from 'react-hot-toast';
+import { logout } from '../store/slices/user.slice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
 
   const user = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const loggedOut = await logoutUser();
+    if(loggedOut === null){
+      toast.error('An error occured');
+      return;
+    }
+    dispatch(logout());
+    toast.success('Logged Out');
+    navigate('/')
+  }
 
   return (
     <header className="navbar bg-base-300 px-6 z-10">
@@ -27,12 +45,12 @@ function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <a className="justify-between">
+              <button>
                 Dashboard
-              </a>
+              </button>
             </li>
             <li>
-              <a>Logout</a>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </ul>
             ): (
