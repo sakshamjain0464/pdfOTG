@@ -1,11 +1,14 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
-function MainContent() {
+function Dashboard() {
+
   return (
-    <main className="sm:max-h-[90vh] h-full w-full bg-base-200">
+    <main className="h-fit w-full bg-base-200">
         <Outlet />
     </main>
   )
 }
 
-export default MainContent
+export default Dashboard

@@ -4,6 +4,7 @@ import Hero from './pages/Home/Hero.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import LoginPage from './pages/Login/LoginPage.jsx'
 import SignupPage from './pages/Signup/Signup.jsx'
+import Merge from './pages/Merge/Merge.jsx'
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
                     {
                         path: 'signup',
                         element: <SignupPage />
+                    },
+                    {
+                        path: 'merge',
+                        element: <Merge />
                     }
                 ]
             },

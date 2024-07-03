@@ -43,7 +43,7 @@ function SignupPage() {
   });
 
   return (
-    <div className="hero h-full w-full bg-base-200">
+    <div className="hero h-fit w-full bg-base-200">
       <div className="hero-content w-full flex-col">
         <div className="lg:text-left mb-4 w-full">
           <h1 className="sm:text-5xl text-3xl text-center font-bold">

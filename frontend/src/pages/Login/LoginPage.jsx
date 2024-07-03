@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import getUser from "../../utils/user/getUser";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -50,7 +51,7 @@ function LoginPage() {
   });
 
   return (
-    <div className="hero h-full w-full bg-base-200">
+    <div className="hero h-[90vh] w-full bg-base-200">
       <div className="hero-content w-full flex-col">
         <div className="lg:text-left mb-4 w-full">
           <h1 className="sm:text-5xl text-3xl text-center font-bold">
@@ -107,7 +108,7 @@ function LoginPage() {
             <GoogleButton />
             <div className="divider my-3">OR</div>
             <div className="form-control mt1">
-              <button className="btn btn-primary">Sign Up</button>
+              <Link className="btn btn-primary" to={'/dashboard/signup'}>Sign Up</Link>
             </div>
           </form>
         </div>

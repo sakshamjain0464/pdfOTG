@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { logout } from '../store/slices/user.slice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
 
@@ -45,9 +46,9 @@ function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <button>
+              <Link to={'/dashboard'}>
                 Dashboard
-              </button>
+              </Link>
             </li>
             <li>
               <button onClick={handleLogout}>Logout</button>
