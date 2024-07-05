@@ -38,7 +38,6 @@ function App() {
       <Navbar />
         <Outlet />
       <Footer />
-      <Modal><Footer /></Modal>
       <Toaster />
       <Modal id={"login-modal"}>
       <div className="w-full h-full flex items-center justify-center flex-col gap-3">

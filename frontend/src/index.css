@@ -2,16 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
     scroll-behavior: smooth;
     overscroll-behavior: none;
 }
 
-*{
+* {
     box-sizing: border-box;
 }
 
-#root{
+#root {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -21,10 +21,22 @@ body{
     overflow-x: hidden;
 }
 
-#hero-particles > canvas{
-    position: static !important; 
+#hero-particles>canvas {
+    position: static !important;
     top: 0;
     left: 0;
     width: 2px;
     z-index: -2;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+    display: none;
+    /* Safari and Chrome */
 }

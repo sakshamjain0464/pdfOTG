@@ -27,12 +27,12 @@ const router = createBrowserRouter([
                         path: 'signup',
                         element: <SignupPage />
                     },
-                    {
-                        path: 'merge',
-                        element: <Merge />
-                    }
                 ]
             },
+            {
+                path: '/merge',
+                element: <Merge />
+            }
         ]
     }
 ])
