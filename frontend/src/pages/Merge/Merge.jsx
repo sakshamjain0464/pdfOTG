@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "../../components/Modal";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 function Merge() {
   const [files, setFiles] = useState([]);
@@ -55,28 +56,26 @@ function Merge() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Upload response:', response.data);
-      const a = document.createElement('a');
-      a.href = response.data.url;
-      a.download = 'merged.pdf';
-      a.click();
+      console.log('Upload response:', response.data)
+      toast.success('PDFs merged successfully');
     } catch (error) {
       console.error('Error uploading files:', error);
+      toast.error('Error merging PDFs');
     }
   }
 
   return (
     <>
-      <div className="sm:h-screen w-screen h-fit overflow-y-auto px-10 flex flex-col items-center p-5">
-        <div className="flex gap-6">
-          <button className="btn btn-secondary" onClick={add}>
+      <div className="h-screen w-screen overflow-y-auto px-10 flex flex-col items-center p-5">
+        <div className="flex gap-6 sm:flex-row flex-col justify-center items-center">
+          <button className="btn btn-secondary sm:w-fit w-full" onClick={add}>
             + Add PDFs
           </button>
-          <button className="btn btn-secondary" onClick={change}>
+          <button className="btn btn-secondary sm:w-fit w-full" onClick={change}>
             {"->"} Change Sequence
           </button>
           {files.length > 1 && (
-            <button className="btn btn-secondary" onClick={mergePDFs}>
+            <button className="btn btn-secondary sm:w-fit w-full" onClick={mergePDFs}>
               {" "}
               Merge PDFs
             </button>

@@ -1,5 +1,6 @@
 import Login from "./Login";
 import ParticlesComponent from "../../components/Particles";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -17,7 +18,7 @@ function Hero() {
               a single document or rearrange pages to create a customized
               compilation, pdfOTG makes the process simple and intuitive.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <Link to='/merge' className="btn btn-primary">Get Started</Link>
           </div>
         </div>
       </div>
