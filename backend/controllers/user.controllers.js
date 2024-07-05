@@ -1,9 +1,9 @@
-const User = require('../models/user.model');       // Import user model
-const passport = require('passport');
-const Session = require('../models/sessions.model');
+import User from '../models/user.model.js';
+import passport from 'passport';
+import Session from '../models/sessions.model.js';
 
 // Signup comtroller
-async function signup(req, res) {
+export async function signup(req, res) {
     try {
         const { firstname, lastname, username, email, password } = req.body;        // Extracting required information
 
@@ -24,7 +24,7 @@ async function signup(req, res) {
 }
 
 // Login Controller
-async function login(req, res) {
+export async function login(req, res) {
     try {
         const { sessionID, user } = req;               // Exttact the session if from request
         // Create a new session
@@ -41,7 +41,7 @@ async function login(req, res) {
 
 
 // Logout Controller
-async function logout(req, res) {
+export async function logout(req, res) {
     try {
         // Extract the session id and userid
         const sessionId = req.sessionID;
@@ -80,6 +80,4 @@ passport.deserializeUser((id, done) => {
     catch (error) {
         done(error, null);
     }
-});
-
-module.exports = { signup, login, logout };        // Export the controllers
+});       // Export the controllers

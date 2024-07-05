@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');  // Import mongoose
+import mongoose from "mongoose";
 
 // Create a schema for sessions
 const sessionSchema = new mongoose.Schema({
@@ -18,4 +18,4 @@ const sessionSchema = new mongoose.Schema({
 
 const Session = mongoose.model('Session', sessionSchema);  // Create model for session schema
 
-module.exports = Session;         // Export the model
+export default Session       // Export the model

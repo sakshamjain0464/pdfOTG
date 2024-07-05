@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');           // Import mongoose
-const bcrypt = require('bcryptjs');             // Import bcrypt for password hashing
+import mongoose from 'mongoose';                 // Import mongoose for database connection
+import bcrypt from 'bcrypt';                     // Import bcrypt for password hashing
 
 const userSchema = new mongoose.Schema({
     firstname: {
@@ -44,4 +44,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;

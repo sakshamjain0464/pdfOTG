@@ -1,5 +1,5 @@
-const Session = require('../models/sessions.model');       // Import Session Model
-const User = require('../models/user.model');
+import Session from '../models/sessions.model.js';
+import User from '../models/user.model.js';
 
 // Authorization middleware
 async function authorize(req, res, next) {
@@ -24,4 +24,4 @@ async function authorize(req, res, next) {
     }
 }
 
-module.exports = authorize;
+export default authorize; // Export the authorize middleware

@@ -1,10 +1,12 @@
-const router = require('express').Router(); // Initialize router
-const passport = require('passport'); // Import Passport
-const { body } = require('express-validator'); // Import express-validator for validating requests
-const { signup, login, logout } = require('../controllers/user.controllers'); // Import functions to execute on user routes from user controller
-const authorize = require('../middlewares/authorize.middleware');  // Import the authorization middleware for securing securing protected routes
-const validation = require('../middlewares/validation.middleware');  // Import validation middleware for request validation
-const Session = require('../models/sessions.model')
+import { Router } from 'express'; // Initialize router
+import passport from 'passport'; // Import Passport
+import { body } from 'express-validator'; // Import express-validator for validating requests
+import { signup, login, logout } from '../controllers/user.controllers.js'; // Import functions to execute on user routes from user controller
+import authorize from '../middlewares/authorize.middleware.js'; // Import the authorization middleware for securing protected routes
+import validation from '../middlewares/validation.middleware.js'; // Import validation middleware for request validation
+import Session from '../models/sessions.model.js'; // Import Session model
+
+const router = Router(); // Initialize the router
 
 // User registration route
 router.post('/register', [
@@ -47,4 +49,4 @@ router.get('/getUser', authorize, (req, res) => {
 // User Logout Route
 router.get('/logout', logout);
 
-module.exports = router; // Export the router
+export default router; // Export the router

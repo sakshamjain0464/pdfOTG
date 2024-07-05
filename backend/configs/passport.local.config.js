@@ -1,6 +1,9 @@
-const passport = require('passport');     // Import passport
-const LocalStrategy = require('passport-local').Strategy; // Import the local strategy
-const User = require('../models/user.model');    // Import user model
+import passport from 'passport'; // Import passport
+import passportLocal from 'passport-local'; // Import passport-local
+import User from '../models/user.model.js'; // Import the user model
+
+const LocalStrategy = passportLocal.Strategy; // Initialize the local strategy
+
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {

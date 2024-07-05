@@ -1,4 +1,4 @@
-const mongoose = require('mongoose'); // Import mongoose
+import mongoose from 'mongoose';   // Import mongoose for creating model
 
 // Schema for storing pdf information
 const pdfSchema = new mongoose.Schema({
@@ -23,4 +23,4 @@ const pdfSchema = new mongoose.Schema({
 // Create a model
 const PDF = mongoose.model('PDF', pdfSchema);
 
-module.exports = PDF;   // Export PDF model
+export default PDF; // Export the model

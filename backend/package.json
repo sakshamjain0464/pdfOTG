@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "Backend for pdfOTG",
   "main": "index.js",
+  "type": "module",
   "author": "Saksham Jain",
   "license": "MIT",
   "scripts": {
     "start": "nodemon index.js"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -16,8 +18,10 @@
     "express-session": "^1.18.0",
     "express-validator": "^7.0.1",
     "mongoose": "^8.3.2",
+    "multer": "^1.4.5-lts.1",
     "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pdf-merger-js": "^5.1.2"
   },
   "devDependencies": {
     "morgan": "^1.10.0"

@@ -1,4 +1,4 @@
-const { validationResult } = require('express-validator');    // Import validation result
+import { validationResult } from 'express-validator';
 
 
 // Validation middleware
@@ -14,4 +14,4 @@ function validation(req, res, next) {
     next();
 }
 
-module.exports = validation;
+export default validation; // Export the validation middleware
